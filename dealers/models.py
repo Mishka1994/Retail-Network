@@ -57,3 +57,37 @@ class Factory(models.Model):
     class Meta:
         verbose_name = 'завод'
         verbose_name_plural = 'заводы'
+
+
+class RetailNetwork(models.Model):
+    title = models.CharField(max_length=256, verbose_name='Название розничной сети')
+    contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
+    products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
+    provider = models.ForeignKey(Factory, on_delete=models.PROTECT, verbose_name='Поставщик')
+    debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность')
+    time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Розничная сеть'
+        verbose_name_plural = 'Розничные сети'
+
+
+class IndividualEntrepreneur(models.Model):
+    title = models.CharField(max_length=256, verbose_name='Название')
+    contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
+    products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
+    provider = models.ForeignKey(RetailNetwork, on_delete=models.PROTECT, verbose_name='Поставщик')
+    time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность')
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Предприниматель'
+        verbose_name_plural = 'Предприниматели'
+
+
