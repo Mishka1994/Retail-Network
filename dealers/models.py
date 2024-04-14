@@ -20,7 +20,7 @@ class Contacts(models.Model):
     country = models.ForeignKey(Countries, on_delete=models.PROTECT, verbose_name='Страна')
     city = models.TextField(verbose_name='Город')
     street = models.TextField(verbose_name='Улица')
-    house_number = models.PositiveSmallIntegerField(verbose_name='Номер дома')
+    house_number = models.CharField(max_length=50, verbose_name='Номер дома')
 
     def __str__(self):
         return f'{self.email} -({self.country}, {self.city}, {self.street}, {self.house_number})'
