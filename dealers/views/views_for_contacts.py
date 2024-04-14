@@ -9,6 +9,11 @@ class ContactCreateAPIView(generics.CreateAPIView):
     serializer_class = ContactsSerializer
 
 
+class ContactListAPIView(generics.ListAPIView):
+    queryset = Contacts.objects.all()
+    serializer_class = ContactsSerializer
+
+
 class ContactDeleteAPIView(generics.DestroyAPIView):
     queryset = Contacts.objects.all()
     serializer_class = ContactsSerializer
