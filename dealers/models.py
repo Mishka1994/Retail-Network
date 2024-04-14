@@ -47,7 +47,7 @@ class Factory(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название завода')
     contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
     products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
-    provider = models.OneToOneField('self', on_delete=models.CASCADE, verbose_name='Поставщик')
+    provider = models.OneToOneField('self', on_delete=models.CASCADE, verbose_name='Поставщик', **NULLABLE)
     time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность', default=0)
 
@@ -89,5 +89,3 @@ class IndividualEntrepreneur(models.Model):
     class Meta:
         verbose_name = 'Предприниматель'
         verbose_name_plural = 'Предприниматели'
-
-
