@@ -5,6 +5,8 @@ from dealers.views.views_for_contacts import ContactCreateAPIView, ContactDelete
 from dealers.views.views_for_country import CountryCreateAPIView, CountryDeleteAPIView
 from dealers.views.views_for_factory import FactoryCreateAPIView, FactoryRetrieveAPIView, FactoryUpdateAPIView, \
     FactoryListAPIView, FactoryDeleteAPIView
+from dealers.views.views_for_network import NetworkCreateAPIView, NetworkRetrieveAPIView, NetworkUpdateAPIView, \
+    NetworkListAPIView, NetworkDeleteAPIView
 from dealers.views.views_for_product import ProductCreateAPIView, ProductDeleteAPIView, ProductListAPIView
 
 app_name = DealersConfig.name
@@ -30,6 +32,14 @@ urlpatterns = [
     path('factory/retrieve/<int:pk>/', FactoryRetrieveAPIView.as_view(), name='factory-retrieve'),
     path('factory/update/<int:pk>/', FactoryUpdateAPIView.as_view(), name='factory-update'),
     path('factory/list/', FactoryListAPIView.as_view(), name='factory-list'),
-    path('factory/delete/<int:pk>/', FactoryDeleteAPIView.as_view(), name='factory-delete')
+    path('factory/delete/<int:pk>/', FactoryDeleteAPIView.as_view(), name='factory-delete'),
+
+    # Network-urls
+    path('network/create/', NetworkCreateAPIView.as_view(), name='network-create'),
+    path('network/retrieve/<int:pk/', NetworkRetrieveAPIView.as_view(), name='network-retrieve'),
+    path('network/update/<int:pk>/', NetworkUpdateAPIView.as_view(), name='network-update'),
+    path('network/list/', NetworkListAPIView.as_view(), name='network-list'),
+    path('network/delete/<int:pk>/', NetworkDeleteAPIView.as_view(), name='network-delete'),
+
 
 ]
