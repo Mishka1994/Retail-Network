@@ -45,11 +45,11 @@ class Products(models.Model):
 
 class Factory(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название завода')
-    contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
-    products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
+    contacts = models.ForeignKey(Contacts, related_name='factory_contact', on_delete=models.CASCADE, verbose_name='Контакты')
+    products = models.ManyToManyField(Products, related_name='factory_product', verbose_name='Продукты')
     provider = models.OneToOneField('self', on_delete=models.CASCADE, verbose_name='Поставщик', **NULLABLE)
     time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность', default=0)
+    debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность', default=0, **NULLABLE)
 
     def __str__(self):
         return f'{self.title}'
@@ -62,7 +62,7 @@ class Factory(models.Model):
 class RetailNetwork(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название розничной сети')
     contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
-    products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
+    products = models.ManyToManyField(Products, related_name='network_product', verbose_name='Продукты')
     provider = models.ForeignKey(Factory, on_delete=models.PROTECT, verbose_name='Поставщик')
     debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность')
     time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
@@ -78,7 +78,7 @@ class RetailNetwork(models.Model):
 class IndividualEntrepreneur(models.Model):
     title = models.CharField(max_length=256, verbose_name='Название')
     contacts = models.ForeignKey(Contacts, on_delete=models.CASCADE, verbose_name='Контакты')
-    products = models.ForeignKey(Products, on_delete=models.PROTECT, verbose_name='Продукты')
+    products = models.ManyToManyField(Products, related_name='entrepreneur_product', verbose_name='Продукты')
     provider = models.ForeignKey(RetailNetwork, on_delete=models.PROTECT, verbose_name='Поставщик')
     time_to_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Задолженность')
