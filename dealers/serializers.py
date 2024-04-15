@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from dealers.models import Countries, Contacts, Products, Factory
+from dealers.models import Countries, Contacts, Products, Factory, IndividualEntrepreneur, RetailNetwork
 
 
 class CountriesSerializer(serializers.ModelSerializer):
@@ -42,4 +42,24 @@ class FactorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Factory
         fields = '__all__'
+
+
+class NetworkSerializer(serializers.ModelSerializer):
+
+    def update(self, instance, validated_data):
+        if validated_data.get('debt'):
+            raise serializers.ValidationError('Нельзя изменять поле debt')
+        instance.title = validated_data.get('title', instance.title)
+        instance.contacts = validated_data.get('contacts', instance.contacts)
+        if validated_data.get('products'):
+            input_products = validated_data.get('products')
+            instance.products.set(input_products)
+        instance.provider = validated_data.get('provider', instance.provider)
+
+        return instance
+
+    class Meta:
+        model = RetailNetwork
+        fields = '__all__'
+
 
