@@ -2,7 +2,9 @@ from django.urls import path
 
 from dealers.apps import DealersConfig
 from dealers.views.views_for_contacts import ContactCreateAPIView, ContactDeleteAPIView, ContactListAPIView
-from dealers.views.views_for_country import CountryCreateAPIView, CountryDeleteAPIView
+from dealers.views.views_for_country import CountryCreateAPIView, CountryDeleteAPIView, CountryListAPIView
+from dealers.views.views_for_enterpreneur import EntrepreneurCreateAPIView, EntrepreneurRetrieveAPIView, \
+    EntrepreneurUpdateAPIView, EntrepreneurListAPIView, EntrepreneurDeleteAPIView
 from dealers.views.views_for_factory import FactoryCreateAPIView, FactoryRetrieveAPIView, FactoryUpdateAPIView, \
     FactoryListAPIView, FactoryDeleteAPIView
 from dealers.views.views_for_network import NetworkCreateAPIView, NetworkRetrieveAPIView, NetworkUpdateAPIView, \
@@ -15,6 +17,7 @@ app_name = DealersConfig.name
 urlpatterns = [
     # Country-urls
     path('countries/create/', CountryCreateAPIView.as_view(), name='country-create'),
+    path('countries/list/', CountryListAPIView.as_view(), name='country-list'),
     path('countries/delete/<int:pk>/', CountryDeleteAPIView.as_view(), name='country-delete'),
 
     # Contacts-urls
@@ -36,10 +39,16 @@ urlpatterns = [
 
     # Network-urls
     path('network/create/', NetworkCreateAPIView.as_view(), name='network-create'),
-    path('network/retrieve/<int:pk/', NetworkRetrieveAPIView.as_view(), name='network-retrieve'),
+    path('network/retrieve/<int:pk>/', NetworkRetrieveAPIView.as_view(), name='network-retrieve'),
     path('network/update/<int:pk>/', NetworkUpdateAPIView.as_view(), name='network-update'),
     path('network/list/', NetworkListAPIView.as_view(), name='network-list'),
     path('network/delete/<int:pk>/', NetworkDeleteAPIView.as_view(), name='network-delete'),
 
+    # Entrepreneur-urls
+    path('entre/create/', EntrepreneurCreateAPIView.as_view(), name='entrepreneur-create'),
+    path('entre/retrieve/<int:pk>/', EntrepreneurRetrieveAPIView.as_view(), name='entrepreneur-retrieve'),
+    path('entre/update/<int:pk>/', EntrepreneurUpdateAPIView.as_view(), name='entrepreneur-update'),
+    path('entre/list/', EntrepreneurListAPIView.as_view(), name='entrepreneur-list'),
+    path('entre/delete/<int:pk>/', EntrepreneurDeleteAPIView.as_view(), name='entrepreneur-delete')
 
 ]
