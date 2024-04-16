@@ -9,6 +9,11 @@ class CountryCreateAPIView(generics.CreateAPIView):
     serializer_class = CountriesSerializer
 
 
+class CountryListAPIView(generics.ListAPIView):
+    queryset = Countries.objects.all()
+    serializer_class = CountriesSerializer
+
+
 class CountryDeleteAPIView(generics.DestroyAPIView):
     queryset = Countries.objects.all()
     serializer_class = CountriesSerializer
