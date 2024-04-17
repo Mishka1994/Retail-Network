@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'drf_yasg',
 
     'dealers',
     'users',
@@ -89,9 +90,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'retail_network',
-        'USER': 'postgres',
-        'PASSWORD': 'qwerty'
+        'NAME': os.getenv('DB_name'),
+        'USER': os.getenv('DB_user'),
+        'PASSWORD': os.getenv('DB_password')
     }
 }
 
