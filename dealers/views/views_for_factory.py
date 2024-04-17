@@ -1,12 +1,13 @@
 from rest_framework import generics
-
-from dealers.models import Factory, Countries, Contacts
+from dealers.models import Factory, Countries
+from dealers.permissions import IsActivate
 from dealers.serializers import FactorySerializer
 
 
 class FactoryCreateAPIView(generics.CreateAPIView):
     queryset = Factory.objects.all()
     serializer_class = FactorySerializer
+    permission_classes = [IsActivate, ]
 
 
 class FactoryRetrieveAPIView(generics.RetrieveAPIView):
