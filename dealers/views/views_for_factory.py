@@ -5,22 +5,26 @@ from dealers.serializers import FactorySerializer
 
 
 class FactoryCreateAPIView(generics.CreateAPIView):
+    """View for create Factory"""
     queryset = Factory.objects.all()
     serializer_class = FactorySerializer
     permission_classes = [IsActivate, ]
 
 
 class FactoryRetrieveAPIView(generics.RetrieveAPIView):
+    """View for specific Factory"""
     queryset = Factory.objects.all()
     serializer_class = FactorySerializer
 
 
 class FactoryUpdateAPIView(generics.UpdateAPIView):
+    """View for update Factory"""
     queryset = Factory.objects.all()
     serializer_class = FactorySerializer
 
 
 class FactoryListAPIView(generics.ListAPIView):
+    """View for list Factory. Can be filtered by country"""
     serializer_class = FactorySerializer
 
     def get_queryset(self):
@@ -33,5 +37,6 @@ class FactoryListAPIView(generics.ListAPIView):
 
 
 class FactoryDeleteAPIView(generics.DestroyAPIView):
+    """View for delete Factory"""
     queryset = Factory.objects.all()
     serializer_class = FactorySerializer

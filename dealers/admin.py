@@ -4,6 +4,7 @@ from dealers.models import Factory, RetailNetwork, IndividualEntrepreneur
 
 @admin.action(description='Очистить задолженность')
 def clear_debt(modeladmin, request, queryset):
+    """Функция для очищения задолженности у выбранных объектов"""
     queryset.update(debt=0)
 
 
@@ -15,6 +16,7 @@ class FactoryAdmin(admin.ModelAdmin):
     actions = [clear_debt]
 
     def link_to_provider(self, obj):
+        """Функция для формирования ссылки на поставщика"""
         if obj.provider_id is None:
             return 'Поставщик не указан'
         else:
@@ -29,6 +31,7 @@ class RetailNetworkAdmin(admin.ModelAdmin):
     actions = [clear_debt]
 
     def link_to_provider(self, obj):
+        """Функция для формирования ссылки на поставщика"""
         if obj.provider_id is None:
             return 'Поставщик не указан'
         else:
@@ -43,6 +46,7 @@ class IndividualEntrepreneurAdmin(admin.ModelAdmin):
     actions = [clear_debt]
 
     def link_to_provider(self, obj):
+        """Функция для формирования ссылки на поставщика"""
         if obj.provider_id is None:
             return 'Поставщик не указан'
         else:
